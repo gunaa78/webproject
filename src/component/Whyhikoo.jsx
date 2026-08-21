@@ -86,9 +86,8 @@ function WhyHikoo() {
 
 
         {/* ================= BENEFITS ================= */}
-        <div className="mt-14">
-
-  <div className="relative">
+        <div className="mt-14 w-full">
+  <div className="relative w-full">
 
     {/* Main Timeline Line */}
     <div
@@ -104,110 +103,92 @@ function WhyHikoo() {
     />
 
     {benefits.map((benefit) => (
-
       <div
         key={benefit.number}
         className="
           group
           relative
           flex
+          w-full
           gap-6
           sm:gap-10
           pb-12
           sm:pb-14
           last:pb-0
+          opacity-100
+          visible
         "
       >
 
         {/* Timeline Dot */}
-        <div
-          className="
-            relative
-            z-10
-            shrink-0
-            w-10
-            sm:w-12
-            flex
-            justify-center
-          "
-        >
+       {/* Timeline Dot */}
+<div
+  className="
+    relative
+    z-20
+    shrink-0
+    w-10
+    sm:w-12
+    flex
+    justify-center
+  "
+>
+  <div
+    className="
+      mt-1
+      w-10
+      h-10
+      sm:w-12
+      sm:h-12
 
-          <div
-            className="
-              mt-1
-              w-10
-              h-10
-              sm:w-12
-              sm:h-12
+      rounded-full
 
-              rounded-full
-              bg-white
+      bg-white
+      border-2
+      border-gray-300
 
-              border-2
-              border-gray-200
+      flex
+      items-center
+      justify-center
 
-              flex
-              items-center
-              justify-center
+      opacity-100
+      visible
 
-              group-hover:border-blue-600
-              group-hover:bg-blue-600
+      sm:group-hover:bg-blue-600
+      sm:group-hover:border-blue-600
 
-              transition-all
-              duration-300
-            "
-          >
+      transition-all
+      duration-300
+    "
+  >
+    <span
+      className="
+        text-xs
+        font-bold
+        text-gray-500
 
-            <span
-              className="
-                text-xs
-                font-bold
-                text-gray-400
-
-                group-hover:text-white
-
-                transition-colors
-                duration-300
-              "
-            >
-              {benefit.number}
-            </span>
-
-          </div>
-
-        </div>
+        sm:group-hover:text-white
+      "
+    >
+      {benefit.number}
+    </span>
+  </div>
+</div>
 
 
         {/* Content */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0 opacity-100 visible">
 
-          {/* Label */}
-          {/* <p
-            className="
-              text-[10px]
-              sm:text-xs
-              font-bold
-              tracking-[0.2em]
-              text-blue-600
-            "
-          >
-            WHY HIKOO
-          </p> */}
-
-
-          {/* Title */}
           <h3
             className="
               mt-2
-
               text-xl
               sm:text-2xl
               lg:text-3xl
-
               font-black
               text-gray-900
 
-              group-hover:text-blue-600
+              sm:group-hover:text-blue-600
 
               transition-colors
               duration-300
@@ -217,16 +198,12 @@ function WhyHikoo() {
           </h3>
 
 
-          {/* Description */}
           <p
             className="
               mt-3
-
               max-w-2xl
-
               text-sm
               sm:text-base
-
               text-gray-500
               leading-7
             "
@@ -235,20 +212,17 @@ function WhyHikoo() {
           </p>
 
 
-          {/* Learn More */}
           <div
             className="
               mt-4
-
               inline-flex
               items-center
               gap-2
-
               text-xs
               font-bold
               text-gray-400
 
-              group-hover:text-blue-600
+              sm:group-hover:text-blue-600
 
               transition-colors
               duration-300
@@ -259,26 +233,19 @@ function WhyHikoo() {
             <span
               className="
                 text-base
-
-                group-hover:translate-x-1
-
+                sm:group-hover:translate-x-1
                 transition-transform
-                duration-300
               "
             >
               →
             </span>
-
           </div>
 
         </div>
 
       </div>
-
     ))}
-
   </div>
-
 </div>
         {/* ================= BOTTOM ================= */}
 
