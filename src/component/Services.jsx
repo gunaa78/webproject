@@ -1,82 +1,100 @@
 const services = [
-  { number: "01", title: "System Design", description: "Build scalable and reliable system architectures." },
-  { number: "02", title: "Software Design", description: "Design practical software solutions for real-world needs." },
-  { number: "03", title: "IT Consulting", description: "Get technical guidance for your business and projects." },
-  { number: "04", title: "Business Consulting", description: "Turn your ideas into practical business solutions." },
-  { number: "05", title: "Student Counselling", description: "Choose the right learning and career direction." },
-  { number: "06", title: "Career Guidance", description: "Plan your career path with the right guidance." },
-  { number: "07", title: "Interview Training", description: "Prepare confidently for technical and HR interviews." },
-  { number: "08", title: "Internship Training", description: "Gain practical experience through industry-focused training." },
-  { number: "09", title: "Aptitude Courses", description: "Improve your logical, quantitative and reasoning skills." },
-  { number: "10", title: "Final Year Projects", description: "Build meaningful projects with proper technical guidance." },
-  { number: "11", title: "Logo / Branding Design", description: "Create a strong and professional brand identity." },
-  { number: "12", title: "Placement Assistance", description: "Get support to prepare and move towards your career." },
+  {
+    number: "01",
+    title: "System Design",
+    description: "Build scalable and reliable system architectures.",
+  },
+  {
+    number: "02",
+    title: "Software Design",
+    description: "Design practical software solutions for real-world needs.",
+  },
+  {
+    number: "03",
+    title: "IT Consulting",
+    description: "Get technical guidance for your business and projects.",
+  },
+  {
+    number: "04",
+    title: "Business Consulting",
+    description: "Turn your ideas into practical business solutions.",
+  },
+  {
+    number: "05",
+    title: "Student Counselling",
+    description: "Choose the right learning and career direction.",
+  },
+  {
+    number: "06",
+    title: "Career Guidance",
+    description: "Plan your career path with the right guidance.",
+  },
+  {
+    number: "07",
+    title: "Interview Training",
+    description: "Prepare confidently for technical and HR interviews.",
+  },
+  {
+    number: "08",
+    title: "Internship Training",
+    description: "Gain practical experience through industry-focused training.",
+  },
+  {
+    number: "09",
+    title: "Aptitude Courses",
+    description: "Improve your logical, quantitative and reasoning skills.",
+  },
+  {
+    number: "10",
+    title: "Final Year Projects",
+    description: "Build meaningful projects with proper technical guidance.",
+  },
+  {
+    number: "11",
+    title: "Logo / Branding Design",
+    description: "Create a strong and professional brand identity.",
+  },
+  {
+    number: "12",
+    title: "Placement Assistance",
+    description: "Get support to prepare and move towards your career.",
+  },
 ];
 
 function Services() {
   return (
     <section
       id="services"
-      className="bg-slate-50 py-16 sm:py-20 lg:py-24"
+      className="bg-[#fafafa] py-20 sm:py-24 lg:py-24"
     >
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10">
 
         {/* ================= HEADER ================= */}
 
-        <div className="">
+        <div className="max-w-3xl">
 
-          <div className="max-w-2xl">
+          <p className="text-sm font-bold tracking-[0.2em] text-blue-600">
+            BEYOND COURSES
+          </p>
 
-            <p className="text-sm font-bold tracking-[0.2em] text-blue-600">
-              BEYOND COURSES
-            </p>
+          <h2 className="mt-5 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            Everything You Need{" "}
+            <span className="text-blue-600">
+              To Grow.
+            </span>
+          </h2>
 
-            <h2
-  className="
-    mt-4
-    text-4xl
-    sm:text-5xl
-    lg:text-6xl
-    font-black
-    tracking-tight
-    text-gray-900
-    leading-tight
-  "
->
-  Additional <span className="text-blue-600">Services</span>
-</h2>
-          </div>
-
-          <p
-            className="
-              max-w-md
-              text-sm
-              sm:text-base
-              text-gray-500
-              leading-7
-              
-              mt-4
-            "
-          >
-           We support your entire career journey — from learning to landing the job.
+          <p className="mt-6 max-w-xl text-sm leading-7 text-slate-500 sm:text-base">
+            We provide practical services and guidance to support your
+            learning, career, projects, and professional growth.
           </p>
 
         </div>
 
 
-        {/* ================= SERVICES ================= */}
+        {/* ================= SERVICES CARDS ================= */}
 
-        <div
-          className="
-            mt-14
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            gap-x-6
-            gap-y-6
-          "
-        >
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
           {services.map((service) => (
 
@@ -85,198 +103,214 @@ function Services() {
               className="
                 group
                 relative
-                bg-white
+                overflow-hidden
+
+                min-h-[270px]
+
                 rounded-2xl
-                p-7
 
                 border
-                border-gray-200
+                border-slate-200
 
-                hover:border-blue-500
-                hover:shadow-[0_15px_40px_rgba(37,99,235,0.08)]
-                hover:-translate-y-1
+                bg-white
+
+                p-7
+                sm:p-8
 
                 transition-all
                 duration-300
+
+                hover:-translate-y-2
+                hover:border-blue-200
+                hover:shadow-[0_20px_45px_rgba(15,23,42,0.08)]
               "
             >
 
-              {/* Number */}
+              {/* Background Number */}
 
-              <div
+              <span
                 className="
-                  flex
-                  items-center
-                  justify-between
+                  absolute
+                  -right-1
+                  -top-5
+
+                  text-[110px]
+                  font-black
+                  leading-none
+
+                  text-slate-50
+
+                  transition-all
+                  duration-500
+
+                  group-hover:text-blue-50
+                  group-hover:scale-110
                 "
               >
+                {service.number}
+              </span>
+
+
+              {/* Top */}
+
+              <div className="relative z-10 flex items-center justify-between">
 
                 <span
                   className="
-                    text-4xl
-                    font-black
-                    text-gray-100
-                    group-hover:text-blue-100
-                    transition-colors
-                    duration-300
+                    text-sm
+                    font-bold
+                    tracking-widest
+
+                    text-blue-600
                   "
                 >
                   {service.number}
                 </span>
 
-                <span
+
+                <div
                   className="
-                    text-gray-300
-                    text-xl
-                    group-hover:text-blue-600
-                    group-hover:translate-x-1
-                    group-hover:-translate-y-1
+                    flex
+                    h-10
+                    w-10
+
+                    items-center
+                    justify-center
+
+                    rounded-full
+
+                    border
+                    border-slate-200
+
+                    text-lg
+                    text-slate-400
+
                     transition-all
                     duration-300
+
+                    group-hover:border-blue-600
+                    group-hover:bg-blue-600
+                    group-hover:text-white
+                    group-hover:rotate-45
                   "
                 >
                   ↗
-                </span>
+                </div>
 
               </div>
 
 
-              {/* Title */}
+              {/* Content */}
 
-              <h3
-                className="
-                  mt-7
-                  text-xl
-                  font-bold
-                  text-gray-900
+              <div className="relative z-10 mt-12">
 
-                  group-hover:text-blue-600
+                <h3
+                  className="
+                    text-2xl
+                    font-bold
+                    tracking-tight
 
-                  transition-colors
-                  duration-300
-                "
-              >
-                {service.title}
-              </h3>
+                    text-slate-900
 
+                    transition-colors
+                    duration-300
 
-              {/* Description */}
-
-              <p
-                className="
-                  mt-3
-                  text-sm
-                  text-gray-500
-                  leading-6
-                "
-              >
-                {service.description}
-              </p>
+                    group-hover:text-blue-600
+                  "
+                >
+                  {service.title}
+                </h3>
 
 
-              {/* Bottom Accent */}
+                <p className="mt-4 max-w-sm text-sm leading-7 text-slate-500">
+                  {service.description}
+                </p>
 
-             {/* Bottom Accent */}
+              </div>
 
-<div
-  className="
-    mt-7
-    h-[3px]
-    w-8
-    rounded-full
-    bg-blue-600
 
-    group-hover:w-16
+              {/* Bottom Line */}
 
-    transition-all
-    duration-300
-  "
-/>
+              <div className="absolute bottom-0 left-0 h-[3px] w-full bg-slate-100">
 
-{/* Learn More */}
+                <div
+                  className="
+                    h-full
+                    w-0
 
-<button
-  type="button"
-  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300"
->
-  Learn More
+                    bg-blue-600
 
-  <span className="transition-transform duration-300 group-hover:translate-x-1">
-    →
-  </span>
-</button>
-</div>
-            
+                    transition-all
+                    duration-500
+
+                    group-hover:w-full
+                  "
+                />
+
+              </div>
+
+            </div>
 
           ))}
-          
 
         </div>
 
 
         {/* ================= BOTTOM CTA ================= */}
 
-        {/* <div
-          className="
-            mt-14
-            rounded-2xl
-            bg-gray-900
-            px-7
-            py-7
-            sm:px-10
-            sm:py-8
+        {/* <div className="mt-20 border-t border-slate-200 pt-10">
 
-            flex
-            flex-col
-            sm:flex-row
-            sm:items-center
-            sm:justify-between
-            gap-5
-          "
-        >
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
 
-          <div>
+            <div>
 
-            <p className="text-sm text-gray-400">
-              Need the right direction?
-            </p>
+              <p className="text-sm font-bold tracking-[0.18em] text-blue-600">
+                LET'S WORK TOGETHER
+              </p>
 
-            <h3
+              <h3 className="mt-3 text-2xl font-bold text-slate-900 sm:text-3xl">
+                Ready to take the next step?
+              </h3>
+
+            </div>
+
+
+            <button
+              type="button"
               className="
-                mt-1
-                text-xl
-                sm:text-2xl
+                group
+                inline-flex
+                w-fit
+                items-center
+                gap-3
+
+                rounded-xl
+
+                bg-slate-900
+
+                px-6
+                py-3.5
+
+                text-sm
                 font-bold
                 text-white
+
+                transition-all
+                duration-300
+
+                hover:bg-blue-600
+                hover:shadow-lg
               "
             >
-              Let’s build your career together.
-            </h3>
+              Get Career Support
+
+              <span className="text-lg transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+
+            </button>
 
           </div>
-
-
-          <button
-            className="
-              w-fit
-              px-6
-              py-3
-              rounded-xl
-
-              bg-blue-600
-              text-white
-
-              text-sm
-              font-bold
-
-              hover:bg-blue-700
-
-              transition-colors
-              duration-200
-            "
-          >
-            Get Career Support →
-          </button>
 
         </div> */}
 

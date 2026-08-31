@@ -1,139 +1,465 @@
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom"; 
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Navbar() {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleClick = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // =====================================================
+  // SCROLL EFFECT
+  // =====================================================
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // =====================================================
+  // CLOSE MOBILE MENU
+  // =====================================================
+
+  const closeMenu = () => {
     setMenuOpen(false);
   };
-  //  const navigate = useNavigate();
+
+  // =====================================================
+  // GO TO HOME SECTION
+  // =====================================================
+
+  const goHomeSection = (section) => {
+    closeMenu();
+
+    if (location.pathname === "/") {
+      setTimeout(() => {
+        const element = document.getElementById(section);
+
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 50);
+
+      return;
+    }
+
+    navigate("/");
+
+    setTimeout(() => {
+      const element = document.getElementById(section);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 300);
+  };
+
+  // =====================================================
+  // INTERNSHIP
+  // =====================================================
+
+  const goInternship = () => {
+    closeMenu();
+    navigate("/internship");
+  };
+
+  // =====================================================
+  // ACTIVE ROUTE
+  // =====================================================
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50">
+    <nav className="fixed top-0 left-0 w-full z-50 px-3 sm:px-5 lg:px-8 pt-3">
 
-      {/* ================= DESKTOP ================= */}
+      {/* =====================================================
+          DESKTOP NAVBAR
+      ===================================================== */}
+
       <div className="hidden lg:block">
 
-        <div className="bg-white border-b border-gray-100 shadow-sm">
+        <div
+          className={`
+            max-w-[1550px]
+            mx-auto
+            rounded-2xl
+            border
+            transition-all
+            duration-500
 
-          <div className="max-w-[1600px] mx-auto px-8">
+            ${
+              scrolled
+                ? "bg-white/90 backdrop-blur-2xl border-white/70 shadow-[0_15px_45px_rgba(15,23,42,0.12)]"
+                : "bg-white/65 backdrop-blur-xl border-white/50 shadow-[0_10px_35px_rgba(15,23,42,0.07)]"
+            }
+          `}
+        >
 
-            <div className="h-[80px] flex items-center">
+          <div className="px-6 xl:px-8">
 
-              {/* ================= LOGO ================= */}
-              <a
-                href="#home"
+            <div className="h-[76px] flex items-center">
+
+              {/* =================================================
+                  LOGO
+              ================================================= */}
+
+              <Link
+                to="/"
+                onClick={closeMenu}
                 className="flex items-center gap-3 shrink-0 group"
               >
 
-                <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-all duration-300">
+                <div
+                  className="
+                    relative
+                    w-11
+                    h-11
+                    rounded-xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    via-blue-600
+                    to-indigo-700
+                    flex
+                    items-center
+                    justify-center
+                    shadow-lg
+                    shadow-blue-600/25
+                    transition-all
+                    duration-300
+                    group-hover:scale-105
+                    group-hover:rotate-1
+                  "
+                >
+
                   <span className="text-white text-xl font-black">
                     H
                   </span>
+
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      rounded-xl
+                      bg-blue-400
+                      blur-xl
+                      opacity-0
+                      group-hover:opacity-20
+                      transition
+                    "
+                  />
+
                 </div>
 
                 <div className="leading-none">
-                  <h1 className="text-2xl font-black tracking-tight text-gray-900">
+
+                  <h1
+                    className="
+                      text-xl
+                      xl:text-2xl
+                      font-black
+                      tracking-tight
+                      text-gray-900
+                    "
+                  >
                     HIKOO
                   </h1>
 
-                  <p className="mt-1 text-[10px] font-bold tracking-[2.5px] text-blue-600">
+                  <p
+                    className="
+                      mt-1
+                      text-[9px]
+                      font-bold
+                      tracking-[3px]
+                      text-blue-600
+                    "
+                  >
                     TECHNOLOGY
                   </p>
+
                 </div>
 
-              </a>
+              </Link>
 
+              {/* =================================================
+                  DESKTOP NAVIGATION
+              ================================================= */}
 
-              {/* ================= NAVIGATION ================= */}
               <div className="flex-1 flex justify-center">
 
-                <div className="flex items-center gap-1">
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-1
+                    px-2
+                    py-2
+                    rounded-2xl
+                    bg-gray-100/50
+                    backdrop-blur-md
+                    border
+                    border-white/70
+                  "
+                >
 
-                  {/* Home */}
-                  <a
-                    href="#home"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-blue-600 bg-blue-50"
+                  {/* HOME */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("home")}
+                    className="
+                      relative
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      text-gray-600
+                      hover:text-blue-600
+                      hover:bg-white
+                      transition-all
+                      duration-300
+                    "
                   >
                     Home
-                  </a>
+                  </button>
 
-                  {/* Courses */}
-                  <a
-                    href="#courses"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  {/* COURSES */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("courses")}
+                    className="
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      text-gray-600
+                      hover:text-blue-600
+                      hover:bg-white
+                      transition-all
+                      duration-300
+                    "
                   >
                     Courses
-                  </a>
+                  </button>
 
-                  {/* Services */}
-                  <a
-                    href="#services"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  {/* SERVICES */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("services")}
+                    className="
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      text-gray-600
+                      hover:text-blue-600
+                      hover:bg-white
+                      transition-all
+                      duration-300
+                    "
                   >
                     Services
-                  </a>
+                  </button>
 
-                  {/* Why Us */}
-                  <a
-                    href="#why"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  {/* WHY US */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("why")}
+                    className="
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      text-gray-600
+                      hover:text-blue-600
+                      hover:bg-white
+                      transition-all
+                      duration-300
+                    "
                   >
                     Why Us
-                  </a>
+                  </button>
 
-                  {/* Internship */}
-                  <a
-                  href="#internship"
-                   
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  {/* INTERNSHIP */}
+
+                  <Link
+                    to="/intern"
+                    onClick={closeMenu}
+                    className={`
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive("/internship")
+                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                          : "text-gray-600 hover:text-blue-600 hover:bg-white"
+                      }
+                    `}
                   >
                     Internship
-                  </a>
+                  </Link>
 
-                  {/* Career */}
-                  <a
-                    href="#career"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  {/* CAREERS */}
+
+                  <Link
+                    to="/career"
+                    onClick={closeMenu}
+                    className={`
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive("/career")
+                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                          : "text-gray-600 hover:text-blue-600 hover:bg-white"
+                      }
+                    `}
                   >
-                    Career
-                  </a>
+                    Careers
+                  </Link>
 
-                  {/* Reviews */}
-                  <a
-                    href="#testimonials"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
-                  >
-                    Reviews
-                  </a>
+                  {/* CONTACT */}
 
-                  {/* Contact */}
-                  <a
-                    href="#contact"
-                    className="px-3.5 py-2.5 rounded-lg text-[13px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition"
+                  <Link
+                    to="/contact"
+                    onClick={closeMenu}
+                    className={`
+                      px-3.5
+                      py-2.5
+                      rounded-xl
+                      text-[13px]
+                      font-semibold
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive("/contact")
+                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                          : "text-gray-600 hover:text-blue-600 hover:bg-white"
+                      }
+                    `}
                   >
                     Contact
-                  </a>
+                  </Link>
 
                 </div>
 
               </div>
 
+              {/* =================================================
+                  CTA
+              ================================================= */}
 
-              {/* ================= RIGHT CTA ================= */}
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center shrink-0">
 
-                <a
-                  href="#enroll"
-                  className="group flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-600/20 hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300"
+                <Link
+                to="/contact#enroll"
+                onClick={() => {
+    setTimeout(() => {
+      const element = document.getElementById("enroll");
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  }}
+
+               
+                  type="button"
+                  // onClick={() => goHomeSection("enroll")}
+                  className="
+                
+                    group
+                    relative
+                    flex
+                    items-center
+                    gap-2
+                    px-5
+                    py-3
+                    rounded-xl
+                    bg-gradient-to-r
+                    from-blue-600
+                    to-indigo-600
+                    text-white
+                    text-sm
+                    font-bold
+                    shadow-lg
+                    shadow-blue-600/20
+                    hover:shadow-blue-600/35
+                    hover:-translate-y-0.5
+                    transition-all
+                    duration-300
+                    overflow-hidden
+                  "
                 >
-                  Enroll Now
 
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">
+                  <span className="relative z-10">
+                    Enroll Now
+                  </span>
+
+                  <span
+                    className="
+                      relative
+                      z-10
+                      text-lg
+                      group-hover:translate-x-1
+                      transition-transform
+                    "
+                  >
                     →
                   </span>
-                </a>
+
+                  <span
+                    className="
+                      absolute
+                      inset-0
+                      -translate-x-full
+                      group-hover:translate-x-full
+                      transition-transform
+                      duration-700
+                      bg-gradient-to-r
+                      from-transparent
+                      via-white/20
+                      to-transparent
+                    "
+                  />
+
+                </Link>
 
               </div>
 
@@ -145,48 +471,106 @@ function Navbar() {
 
       </div>
 
+      {/* =====================================================
+          MOBILE / TABLET NAVBAR
+      ===================================================== */}
 
-      {/* ================= MOBILE / TABLET ================= */}
       <div className="lg:hidden">
 
-        <div className="bg-white border-b border-gray-100 shadow-sm">
+        <div
+          className={`
+            rounded-2xl
+            border
+            transition-all
+            duration-300
 
-          <div className="px-5 sm:px-8">
+            ${
+              scrolled
+                ? "bg-white/95 backdrop-blur-2xl border-white shadow-lg"
+                : "bg-white/75 backdrop-blur-xl border-white/60 shadow-md"
+            }
+          `}
+        >
 
-            <div className="h-[72px] flex items-center justify-between">
+          <div className="px-4 sm:px-6">
 
-              {/* Logo */}
-              <a
-                href="#home"
-                onClick={handleClick}
+            <div className="h-[68px] flex items-center justify-between">
+
+              {/* MOBILE LOGO */}
+
+              <Link
+                to="/"
+                onClick={closeMenu}
                 className="flex items-center gap-3"
               >
 
-                <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-md">
-                  <span className="text-white text-xl font-black">
+                <div
+                  className="
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    to-indigo-700
+                    flex
+                    items-center
+                    justify-center
+                    shadow-md
+                    shadow-blue-600/20
+                  "
+                >
+
+                  <span className="text-white text-lg font-black">
                     H
                   </span>
+
                 </div>
 
                 <div className="leading-none">
 
-                  <h1 className="text-lg font-extrabold text-gray-900">
+                  <h1 className="text-lg font-black text-gray-900">
                     HIKOO
                   </h1>
 
-                  <p className="mt-1 text-[7px] font-bold tracking-[2px] text-blue-600">
+                  <p
+                    className="
+                      mt-1
+                      text-[7px]
+                      font-bold
+                      tracking-[2px]
+                      text-blue-600
+                    "
+                  >
                     TECHNOLOGY
                   </p>
 
                 </div>
 
-              </a>
+              </Link>
 
+              {/* MENU BUTTON */}
 
-              {/* Menu Button */}
               <button
+                type="button"
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="w-11 h-11 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 flex items-center justify-center text-xl hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 transition-all duration-300"
+                className={`
+                  w-11
+                  h-11
+                  rounded-xl
+                  border
+                  flex
+                  items-center
+                  justify-center
+                  text-lg
+                  transition-all
+                  duration-300
+
+                  ${
+                    menuOpen
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white/60 text-gray-800 border-white/70 hover:bg-blue-50 hover:text-blue-600"
+                  }
+                `}
               >
                 {menuOpen ? "✕" : "☰"}
               </button>
@@ -195,101 +579,229 @@ function Navbar() {
 
           </div>
 
+          {/* =================================================
+              MOBILE MENU
+          ================================================= */}
 
-          {/* ================= MOBILE MENU ================= */}
           {menuOpen && (
 
-            <div className="border-t border-gray-100 bg-white max-h-[calc(100vh-75px)] overflow-y-auto">
+            <div
+              className="
+                border-t
+                border-white/60
+                bg-white/90
+                backdrop-blur-2xl
+                rounded-b-2xl
+                max-h-[calc(100vh-90px)]
+                overflow-y-auto
+                overscroll-contain
+              "
+            >
 
-              <div className="px-5 sm:px-8 py-5">
+              <div className="px-4 sm:px-6 py-4">
 
                 <div className="flex flex-col gap-1">
 
-                  {/* Home */}
-                  <a
-                    href="#home"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold bg-blue-50 text-blue-600"
+                  {/* HOME */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("home")}
+                    className="
+                      text-left
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      text-gray-700
+                      hover:bg-blue-50
+                      hover:text-blue-600
+                      transition
+                    "
                   >
                     Home
-                  </a>
+                  </button>
 
-                  {/* Courses */}
-                  <a
-                    href="#courses"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* COURSES */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("courses")}
+                    className="
+                      text-left
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      text-gray-700
+                      hover:bg-blue-50
+                      hover:text-blue-600
+                      transition
+                    "
                   >
                     Courses
-                  </a>
+                  </button>
 
-                  {/* Services */}
-                  <a
-                    href="#services"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* SERVICES */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("services")}
+                    className="
+                      text-left
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      text-gray-700
+                      hover:bg-blue-50
+                      hover:text-blue-600
+                      transition
+                    "
                   >
                     Services
-                  </a>
+                  </button>
 
-                  {/* Why Us */}
-                  <a
-                    href="#why"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* WHY US */}
+
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("why")}
+                    className="
+                      text-left
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      text-gray-700
+                      hover:bg-blue-50
+                      hover:text-blue-600
+                      transition
+                    "
                   >
                     Why Us
-                  </a>
+                  </button>
 
-                  {/* Internship */}
-                  <a
-                   href="#internship"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* INTERNSHIP */}
+
+                  <Link
+                    to="/intern"
+                    onClick={closeMenu}
+                    className={`
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      transition
+
+                      ${
+                        isActive("/internship")
+                          ? "bg-blue-600 text-white"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }
+                    `}
                   >
                     Internship
-                  </a>
+                  </Link>
 
-                  {/* Career */}
-                  <a
-                    href="#career"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* CAREER */}
+
+                  <Link
+                    to="/career"
+                    onClick={closeMenu}
+                    className={`
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      transition
+
+                      ${
+                        isActive("/career")
+                          ? "bg-blue-600 text-white"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }
+                    `}
                   >
                     Career
-                  </a>
+                  </Link>
 
-                  {/* Reviews */}
-                  <a
-                    href="#testimonials"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* REVIEWS */}
+
+                  {/* <button
+                    type="button"
+                    onClick={() => goHomeSection("testimonials")}
+                    className="
+                      text-left
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      text-gray-700
+                      hover:bg-blue-50
+                      hover:text-blue-600
+                      transition
+                    "
                   >
                     Reviews
-                  </a>
+                  </button> */}
 
-                  {/* Contact */}
-                  <a
-                    href="#contact"
-                    onClick={handleClick}
-                    className="px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  {/* CONTACT */}
+
+                  <Link
+                    to="/contact"
+                    onClick={closeMenu}
+                    className={`
+                      px-4
+                      py-3.5
+                      rounded-xl
+                      text-sm
+                      font-semibold
+                      transition
+
+                      ${
+                        isActive("/contact")
+                          ? "bg-blue-600 text-white"
+                          : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      }
+                    `}
                   >
                     Contact
-                  </a>
+                  </Link>
 
                 </div>
 
+                {/* MOBILE CTA */}
 
-                {/* Mobile CTA */}
                 <div className="mt-4">
 
-                  <a
-                    href="#enroll"
-                    onClick={handleClick}
-                    className="block text-center py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-md shadow-blue-600/20 hover:bg-blue-700 transition"
+                  <button
+                    type="button"
+                    onClick={() => goHomeSection("enroll")}
+                    className="
+                      w-full
+                      py-3.5
+                      rounded-xl
+                      bg-gradient-to-r
+                      from-blue-600
+                      to-indigo-600
+                      text-white
+                      font-bold
+                      shadow-lg
+                      shadow-blue-600/20
+                      hover:shadow-blue-600/30
+                      transition-all
+                    "
                   >
                     Enroll Now →
-                  </a>
+                  </button>
 
                 </div>
 
@@ -305,6 +817,6 @@ function Navbar() {
 
     </nav>
   );
-}
+};
 
 export default Navbar;
